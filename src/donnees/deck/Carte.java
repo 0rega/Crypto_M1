@@ -1,4 +1,4 @@
-package algorithme.generateurdecles;
+package donnees.deck;
 
 public class Carte {
 

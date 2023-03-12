@@ -13,6 +13,8 @@ import exceptions.ExceptionChiffrementImpossible;
 import exceptions.ExceptionConversionImpossible;
 import exceptions.ExceptionCryptographie;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AlgorithmeSolitaireTest {
@@ -30,7 +32,7 @@ class AlgorithmeSolitaireTest {
         Personne alice = new Personne("Alice");
         alice.setAlgorithme(new AlgorithmeSolitaire());
 
-        GenerateurDeClesSolitaire clePrivee = new GenerateurDeClesSolitaire(0);
+        GenerateurDeClesSolitaire clePrivee = new GenerateurDeClesSolitaire(0, Collections.emptyList());
         Cles cles = new Cles();
         cles.addCle("cleSolitaire", new CleString("AAAAA"));
 
@@ -51,7 +53,7 @@ class AlgorithmeSolitaireTest {
         Personne alice = new Personne("Alice");
         alice.setAlgorithme(new AlgorithmeSolitaire());
 
-        GenerateurDeClesSolitaire clePrivee = new GenerateurDeClesSolitaire(0);
+        GenerateurDeClesSolitaire clePrivee = new GenerateurDeClesSolitaire(0, Collections.emptyList());
         Cles cles = new Cles();
         cles.addCle("cleSolitaire", new CleString("AAAAA"));
 

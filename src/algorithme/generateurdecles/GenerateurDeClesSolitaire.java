@@ -2,6 +2,7 @@ package algorithme.generateurdecles;
 
 import donnees.cles.CleString;
 import donnees.cles.Cles;
+import donnees.deck.Carte;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,11 +13,12 @@ import java.util.stream.Collectors;
 
 public class GenerateurDeClesSolitaire implements GenerateurDeCles {
 
-    private final List<Carte> deck = new ArrayList<>();
+    private List<Carte> deck;
     private final int taille;
 
-    public GenerateurDeClesSolitaire(int taille){
+    public GenerateurDeClesSolitaire(int taille, List<Carte> deck){
         this.taille = taille;
+        this.deck = new ArrayList<>(deck);
     }
     @Override
     public Cles genererClePublique() {
@@ -29,8 +31,6 @@ public class GenerateurDeClesSolitaire implements GenerateurDeCles {
         StringBuilder cle = new StringBuilder();
         int i = 0;
 
-        createDeck();
-        step1();
         while(i < taille) {
             step2();
 
@@ -46,44 +46,10 @@ public class GenerateurDeClesSolitaire implements GenerateurDeCles {
 
         }
 
+        System.out.println(cle.toString());
+        System.out.println(deck);
         cles.addCle("cleSolitaire", new CleString(cle.toString()));
         return cles;
-    }
-
-    public void createDeck(){
-        String symb = "";
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 13; j++){
-
-                switch(i){
-                    case 0:
-                        symb = "TREFLE";
-                        break;
-                    case 1:
-                        symb = "CARREAU";
-                        break;
-                    case 2:
-                        symb = "COEUR";
-                        break;
-                    case 3:
-                        symb = "PIQUE";
-                        break;
-                }
-                Carte carte = new Carte(symb, j + 1);
-                deck.add(carte);
-            }
-        }
-
-        //Ajout des deux jokers
-        for(int k = 0; k < 2; k++)
-        {
-            Carte carte = new Carte("JOKER", 53 + k);
-            deck.add(carte);
-        }
-    }
-
-    public void step1 (){
-        Collections.shuffle(deck);
     }
 
     public void step2 (){

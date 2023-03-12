@@ -3,6 +3,8 @@ package protocoles;
 import algorithme.chiffrement.AlgorithmeSolitaire;
 import algorithme.generateurdecles.GenerateurDeClesSolitaire;
 import donnees.cles.Cles;
+import donnees.deck.Carte;
+import donnees.deck.Deck;
 import donnees.messages.Message;
 import donnees.messages.MessageString;
 import entites.Personne;
@@ -10,6 +12,7 @@ import entites.Univers;
 import exceptions.ExceptionCryptographie;
 
 import java.io.*;
+import java.util.List;
 import java.util.Scanner;
 
 public class ProtocoleSolitaire  implements Protocole{
@@ -46,17 +49,24 @@ public class ProtocoleSolitaire  implements Protocole{
 
         MessageString msgClair = new MessageString(message);
 
-        GenerateurDeClesSolitaire clePrivee = new GenerateurDeClesSolitaire(message.length());
-        Cles cles = clePrivee.genererClePrivee();
-        alice.setClesPrivees(cles);
-        bob.setClesPrivees(cles);
+        Deck deck = new Deck();
+        List<Carte> cartes = deck.createDeck();
+
+        GenerateurDeClesSolitaire clePriveeAlice = new GenerateurDeClesSolitaire(message.length(), cartes);
+        Cles clesAlice = clePriveeAlice.genererClePrivee();
+        alice.setClesPrivees(clesAlice);
+
+        GenerateurDeClesSolitaire clePriveeBob = new GenerateurDeClesSolitaire(message.length(), cartes);
+        Cles clesBob = clePriveeBob.genererClePrivee();
+        bob.setClesPrivees(clesBob);
+
 
         try {
-            Message msgChiff = alice.chiffrer(msgClair, cles);
+            Message msgChiff = alice.chiffrer(msgClair, clesAlice);
             Univers.addMessage("Message Alice", msgChiff);
 
             Message msgRecup = Univers.getMessage("Message Alice");
-            Message msgFinal = bob.dechiffrer(msgRecup, cles);
+            Message msgFinal = bob.dechiffrer(msgRecup, clesBob);
 
             System.out.println("\n*****Vous*****");
             System.out.println("Message Clair de vous : " + msgClair.asString());

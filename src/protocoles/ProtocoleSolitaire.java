@@ -9,6 +9,8 @@ import entites.Personne;
 import entites.Univers;
 import exceptions.ExceptionCryptographie;
 
+import java.util.Scanner;
+
 public class ProtocoleSolitaire  implements Protocole{
     @Override
     public void executer() {
@@ -19,13 +21,16 @@ public class ProtocoleSolitaire  implements Protocole{
         alice.setAlgorithme(new AlgorithmeSolitaire());
         bob.setAlgorithme(new AlgorithmeSolitaire());
 
-        GenerateurDeClesSolitaire clePrivee = new GenerateurDeClesSolitaire(6);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nVeuillez saisir votre message :");
+        String message = sc.nextLine();
+
+        MessageString msgClair = new MessageString(message);
+
+        GenerateurDeClesSolitaire clePrivee = new GenerateurDeClesSolitaire(message.length());
         Cles cles = clePrivee.genererClePrivee();
         alice.setClesPrivees(cles);
         bob.setClesPrivees(cles);
-
-        String message = "AAAAA";
-        MessageString msgClair = new MessageString(message);
 
         try {
             Message msgChiff = alice.chiffrer(msgClair, cles);
@@ -34,7 +39,7 @@ public class ProtocoleSolitaire  implements Protocole{
             Message msgRecup = Univers.getMessage("Message Alice");
             Message msgFinal = bob.dechiffrer(msgRecup, cles);
 
-            System.out.println("*****Alice*****");
+            System.out.println("*****Vous*****");
             System.out.println("Message Clair d'Alice : " + msgClair.asString());
             System.out.println("\nMessage chiffré par Alice : " + msgChiff.asString());
             System.out.println("\n*****Bob*****");

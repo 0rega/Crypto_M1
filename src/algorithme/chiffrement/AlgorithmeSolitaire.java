@@ -8,6 +8,7 @@ import exceptions.ExceptionChiffrementImpossible;
 import exceptions.ExceptionConversionImpossible;
 import exceptions.ExceptionCryptographie;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class AlgorithmeSolitaire implements Algorithme{
@@ -57,7 +58,11 @@ public class AlgorithmeSolitaire implements Algorithme{
                 int msgCharASCII = (int)messageUpper.charAt(i);
                 int cleCharASCII = (int)clePrivee.charAt(i);
 
-                msgCharASCII = ((msgCharASCII - 65) - (cleCharASCII - 64)) % 26 + 65;
+                msgCharASCII = ((msgCharASCII - 65) - (cleCharASCII - 64));
+                if(msgCharASCII <= 0)
+                    msgCharASCII += 26;
+
+                msgCharASCII = msgCharASCII % 26 + 65;
 
                 msgFinale.add(msgCharASCII);
             }
@@ -66,8 +71,8 @@ public class AlgorithmeSolitaire implements Algorithme{
             throw new ExceptionChiffrementImpossible("Chiffrement Impossible");
         }
 
-        Message messageChiffASCII = new MessageASCII(msgFinale);
-        MessageString msgChiffre = new MessageString(messageChiffASCII.asString());
-        return msgChiffre;
+        Message messageDechiffASCII = new MessageASCII(msgFinale);
+        MessageString msgDechiffre = new MessageString(messageDechiffASCII.asString());
+        return msgDechiffre;
     }
 }

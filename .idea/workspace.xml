@@ -52,7 +52,7 @@
       <recent name="algorithme.chiffrement" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AlgorithmeSolitaireTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Crypto_M1" />
@@ -77,8 +77,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AlgorithmeSolitaireTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.AlgorithmeSolitaireTest" />
       </list>
     </recent_temporary>
   </component>

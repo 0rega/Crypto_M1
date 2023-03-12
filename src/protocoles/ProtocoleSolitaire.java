@@ -25,8 +25,7 @@ public class ProtocoleSolitaire  implements Protocole{
         alice.setAlgorithme(new AlgorithmeSolitaire());
         bob.setAlgorithme(new AlgorithmeSolitaire());
 
-        String message = "";
-        BufferedReader lecteurAvecBuffer = null;
+        StringBuilder message = new StringBuilder();
         File doc = new File("D:\\Cours\\M1\\S2\\Cryptographie\\Cryptographie\\Crypto_M1\\src\\fichier.txt");
 
         Scanner sc = new Scanner(System.in);
@@ -39,15 +38,15 @@ public class ProtocoleSolitaire  implements Protocole{
 
             while(scanner.hasNextLine())
             {
-                message += " " + scanner.nextLine();
+                message.append(" ").append(scanner.nextLine());
             }
             scanner.close();
         } else {
             System.out.println("\nVeuillez saisir votre message :");
-            message = sc.nextLine();
+            message = new StringBuilder(sc.nextLine());
         }
 
-        MessageString msgClair = new MessageString(message);
+        MessageString msgClair = new MessageString(message.toString());
 
         Deck deck = new Deck();
         List<Carte> cartes = deck.createDeck();

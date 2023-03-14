@@ -8,6 +8,7 @@ import exceptions.ExceptionConversionImpossible;
 import protocoles.Protocole;
 import protocoles.ProtocoleSolitaire;
 
+import javax.swing.*;
 import java.io.*;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -16,12 +17,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws ExceptionConversionImpossible, IOException {
 
-        System.out.println("Algorithme Solitaire");
-        Protocole protoS = new ProtocoleSolitaire();
-
-        while(true){
-            protoS.executer();
-        }
+       new Window();
 
     }
 

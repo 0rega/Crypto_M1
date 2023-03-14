@@ -1,3 +1,5 @@
+package Graphique;
+
 import exceptions.ExceptionCryptographie;
 import protocoles.Protocole;
 import protocoles.ProtocoleSolitaire;
@@ -8,15 +10,13 @@ import java.awt.event.*;
 import java.io.*;
 
 public class Window extends JFrame {
-    ImageIcon alice = new ImageIcon(".\\src\\alice.png");
-    ImageIcon bob = new ImageIcon(".\\src\\bob.png");
+    ImageIcon alice = new ImageIcon(".\\src\\icons\\alice.png");
+    ImageIcon bob = new ImageIcon(".\\src\\icons\\bob.png");
     JTextArea text1 = new JTextArea();
     JTextArea text2 = new JTextArea();
     JButton bChiffrer = new JButton("Chiffrer");
     JButton bDechiffrer = new JButton("Déchiffrer");
     JPanel panel = new JPanel();
-    JPanel panel2 = new JPanel();
-
     File currentFile = null;
 
     Protocole protoS = new ProtocoleSolitaire();
@@ -33,22 +33,15 @@ public class Window extends JFrame {
         gl.setVgap(7); //Cinq pixels d'espace entre les lignes (V comme Vertical)
         panel.setLayout(gl);
 
-
-        GridLayout gl1 = new GridLayout(2, 1);
-        gl1.setHgap(7); //Cinq pixels d'espace entre les colonnes (H comme Horizontal)
-        gl1.setVgap(7); //Cinq pixels d'espace entre les lignes (V comme Vertical)
-        panel2.setLayout(gl1);
-
         addMenuBar();
         addIcones();
         addText();
         addButtons();
-        panel.add(panel2);
 
         this.add(panel);
 
         setVisible(true);
-        setSize(500,500);
+        setSize(600,450);
     }
 
     public void searchFile() throws IOException {
@@ -71,8 +64,8 @@ public class Window extends JFrame {
         JMenuBar menubar = new JMenuBar();
         // Créer le menu
         JMenu menu = new JMenu("Menu");
-        JMenuItem e1 = new JMenuItem("Import File");
-        JMenuItem e2 = new JMenuItem("Clear");
+        JMenuItem e1 = new JMenuItem("Importer fichier");
+        JMenuItem e2 = new JMenuItem("Effacer");
         e1.addActionListener(evt -> {
             try {
                 searchFile();
@@ -149,11 +142,11 @@ public class Window extends JFrame {
             }
         });
 
-        getContentPane().add(bChiffrer, "Center");
-        getContentPane().add(bDechiffrer, "Center");
+        getContentPane().add(bChiffrer);
+        getContentPane().add(bDechiffrer);
 
-        panel2.add(bChiffrer);
-        panel2.add(bDechiffrer);
+        panel.add(bChiffrer);
+        panel.add(bDechiffrer);
     }
 
     public void addIcones(){

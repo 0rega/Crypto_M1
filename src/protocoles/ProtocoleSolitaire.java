@@ -34,6 +34,7 @@ public class ProtocoleSolitaire  implements Protocole{
 
     public String chiffrer(String message) throws ExceptionCryptographie {
         init();
+        message = message.replaceAll("[^a-zA-Z]", "");
         Message msgChiff = new MessageString(message);
         try{
             GenerateurDeClesSolitaire clePriveeAlice = new GenerateurDeClesSolitaire(message.length(), cartes);
